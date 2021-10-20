@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.example.saolei.view.TitleView_Face
+            android:id="@+id/face"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/mineLastedNum"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:layout_centerInParent="true"
+        android:horizontalSpacing="0dp"
+        android:layout_width="800px"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="几行" />
+        <EditText
+            android:id="@+id/editText_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="几列" />
+<!--        <EditText-->
+<!--            android:id="@+id/editText_unitSize"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="单位格子边长" />-->
+        <EditText
+            android:id="@+id/editText_MineNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="雷数" />
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

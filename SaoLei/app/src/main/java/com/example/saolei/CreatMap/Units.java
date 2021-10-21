@@ -14,13 +14,14 @@ public class Units{
     //存储小单元格的二维数组
     public Unit[][] units;
 
-    public int click(int heightIndex, int widthIndex) {
+    //单机一个格子，自动判断标记还是打开四周，返回值与showAround一致
+    public Object click(int heightIndex, int widthIndex) {
         Unit unit;
         unit=units[heightIndex][widthIndex];
         System.out.println(unit);
         if (!unit.isShow) {
             boolean b = unit.mark();
-            return !b ? 3 : 2;
+            return b ? 0 : 1;
         } else {
             return unit.showAround();
         }
@@ -36,9 +37,63 @@ public class Units{
         return units[heightIndex][widthIndex].show();
     }
 
-    //打开指定格子周围的格子，无法打开返回0，成功打开返回2，打开之后出现了雷返回3.
-    public int showAround(int heightIndex, int widthIndex) {
+    //打开指定格子周围的格子，无法打开返回0，成功打开返回1，打开之后出现了雷返回3.
+    public Object showAround(int heightIndex, int widthIndex) {
         return units[heightIndex][widthIndex].showAround();
+    }
+
+    //返回被标记的格子数目（unit.isMark）
+    public int markedUnits() {
+        int count=0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Unit unit = units[i][j];
+                if (unit.isMark()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    //返回被正确标记的格子数目（unit.isMark&unit.num==9）
+    public int correctMarkedUnits() {
+        int count=0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Unit unit = units[i][j];
+                if (unit.isMark()&&(unit.getNum()==9)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+    //打开所有雷格子
+    public void showAllMines() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Unit unit = units[i][j];
+                if (unit.getNum() == 9) {
+                    unit.show();
+                }
+            }
+        }
+    }
+
+    //打开一个num=0的格子，没有则无法打开
+    public void showSomeUnits() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Unit unit = units[i][j];
+                if (unit.getNum() == 0) {
+                    unit.show();
+                    return;
+                }
+            }
+        }
     }
 
     /**

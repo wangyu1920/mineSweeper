@@ -13,7 +13,8 @@ public class TitleView_Face extends androidx.appcompat.widget.AppCompatImageView
     public TitleView_Face(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public int gameState;
+    //游戏状态，0正在游戏，1赢2输。
+    public int gameState=0;
 
     @SuppressLint("DrawAllocation")
     @Override

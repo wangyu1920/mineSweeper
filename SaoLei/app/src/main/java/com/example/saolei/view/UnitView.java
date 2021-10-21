@@ -14,6 +14,7 @@ public class UnitView extends AppCompatImageView {
         super(context);
     }
     Unit unit;
+
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
@@ -21,7 +22,12 @@ public class UnitView extends AppCompatImageView {
     @Override
     @SuppressLint("DrawAllocation")
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+
+        if (unit.isTheFirstMine) {
+            setImageResource(R.drawable.u9f);
+            super.onDraw(canvas);
+            return;
+        }
         if (!unit.isShow()) {//还没有展现的格子,根据有没有被标记设置图形
             if (unit.isMark()) {
                 setImageResource(R.drawable.um);
@@ -42,5 +48,6 @@ public class UnitView extends AppCompatImageView {
                 default:setImageResource(R.drawable.u9);break;
             }
         }
+        super.onDraw(canvas);
     }
 }

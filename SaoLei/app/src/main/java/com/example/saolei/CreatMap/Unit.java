@@ -4,6 +4,9 @@ package com.example.saolei.CreatMap;
 import android.view.View;
 
 public class Unit{
+
+    //是否是第一个出现的雷，根据这个绘制雷的图案。
+    public boolean isTheFirstMine=false;
     
     private Unit LT;
     private Unit T;
@@ -41,39 +44,60 @@ public class Unit{
         return num!=9;
     }
     
-    //尝试打开周围的格子，无法打开返回0，成功打开返回2，打开之后出现了雷返回3.
-    protected int showAround() {
+    //尝试打开周围的格子，无法打开返回0，成功打开返回1，打开之后出现了雷返回雷格子对象.
+    protected Object showAround() {
         if (checkAroundCanShow()) {
-            boolean isHaveMine=false;
+
+            boolean isHaveMine=true;
             if (!LT.isMark) {
                 isHaveMine= LT.show();
+                if (!isHaveMine) {
+                    return LT;
+                }
             }
             if (!T.isMark) {
-                isHaveMine=(isHaveMine|T.show());
+                isHaveMine= T.show();
+                if (!isHaveMine) {
+                    return T;
+                }
             }
             if (!RT.isMark) {
-                isHaveMine=(isHaveMine|RT.show());
+                isHaveMine=((isHaveMine&&RT.show()));
+                if (!isHaveMine) {
+                    return RT;
+                }
             }
             if (!L.isMark) {
-                isHaveMine=(isHaveMine|L.show());
+                isHaveMine=((isHaveMine&&L.show()));
+                if (!isHaveMine) {
+                    return L;
+                }
             }
             if (!R.isMark) {
-                isHaveMine=(isHaveMine|R.show());
+                isHaveMine=((isHaveMine&&R.show()));
+                if (!isHaveMine) {
+                    return R;
+                }
             }
             if (!LB.isMark) {
-                isHaveMine=(isHaveMine|LB.show());
+                isHaveMine=((isHaveMine&&LB.show()));
+                if (!isHaveMine) {
+                    return LB;
+                }
             }
             if (!B.isMark) {
-                isHaveMine=(isHaveMine|B.show());
+                isHaveMine=((isHaveMine&&B.show()));
+                if (!isHaveMine) {
+                    return B;
+                }
             }
             if (!RB.isMark) {
-                isHaveMine=(isHaveMine|RB.show());
+                isHaveMine=((isHaveMine&&RB.show()));
+                if (!isHaveMine) {
+                    return RB;
+                }
             }
-            if (isHaveMine) {
-                return 3;
-            } else {
-                return 1;
-            }
+            return 1;
         } else {
             return 0;
         } 
@@ -82,28 +106,28 @@ public class Unit{
     //判断这个格子四周的格子可不可以被打开
     protected boolean checkAroundCanShow() {
         int i=0;
-        if (LT.isMark || (LT.isShow && LT.num == 9)) {
+        if (LT.isMark) {
             i++;
         }
-        if (T.isMark || (T.isShow && T.num == 9)) {
+        if (T.isMark) {
             i++;
         }
-        if (L.isMark || (L.isShow && L.num == 9)) {
+        if (RT.isMark) {
             i++;
         }
-        if (RT.isMark || (RT.isShow && RT.num == 9)) {
+        if (L.isMark) {
             i++;
         }
-        if (R.isMark || (R.isShow && R.num == 9)) {
+        if (R.isMark) {
             i++;
         }
-        if (LB.isMark || (LB.isShow && LB.num == 9)) {
+        if (LB.isMark) {
             i++;
         }
-        if (B.isMark || (B.isShow && B.num == 9)) {
+        if (B.isMark) {
             i++;
         }
-        if (RB.isMark || (LT.isShow && RB.num == 9)) {
+        if (RB.isMark) {
             i++;
         }
         return i == num;

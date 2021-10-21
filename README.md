@@ -11,4 +11,4 @@ bug多多，还会继续完善
 *******
 #### 更新版本：
 * [v0.0.1  2021.10.21上传](https://github.com/wangyu1920/mineSweeper/releases/tag/0.0.1) 目前还没有做识别输赢的功能，另外ui设计方面也有待完善。
-* 
+* [v1.0.0  2021.10.22上传](https://github.com/wangyu1920/mineSweeper/releases/tag/1.0.0) 已经具备基本的功能，欢迎试玩。
